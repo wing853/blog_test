@@ -24,8 +24,10 @@ public class BoardService {
     private final BoardRepository br;
 
     public BoardResponse.PageDTO showBoard(Integer page) {
+        // 한 페이지에 5개씩, ID 내림차순 정렬
         Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "id"));
         Page<Board> boardPage = br.findAll(pageable);
+
         return new BoardResponse.PageDTO(boardPage);
     }
 

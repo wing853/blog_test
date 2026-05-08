@@ -12,22 +12,50 @@ public class BoardResponse {
 
     @Data
     public static class PageDTO {
-        private List<ListDTO> boards; // 게시글 목록
-        private Integer prevPage;      // 이전 페이지 번호
-        private Integer nextPage;      // 다음 페이지 번호
-        private boolean first;         // 첫 페이지 여부
-        private boolean last;          // 마지막 페이지 여부
-        private List<Integer> pageNumbers; // 페이지 번호 리스트 (1, 2, 3...)
+        private List<ListDTO> boards;
+        private Integer prevPage;
+        private Integer nextPage;
+        private boolean first;
+        private boolean last;
+        private List<PageNumber> pageNumbers; // 숫자 리스트 대신 객체 리스트 사용
 
         public PageDTO(Page<Board> boardPage) {
-            this.boards = boardPage.getContent().stream().map(ListDTO::new).collect(Collectors.toList());
+            this.boards = boardPage.getContent().stream()
+                    .map(ListDTO::new)
+                    .collect(Collectors.toList());
             this.first = boardPage.isFirst();
             this.last = boardPage.isLast();
             this.prevPage = boardPage.getNumber() - 1;
             this.nextPage = boardPage.getNumber() + 1;
-            // 페이지 번호 리스트 로직 (예: 0~4)
+
+            // 0부터 시작하는 인덱스를 1부터 시작하는 번호와 매핑
             this.pageNumbers = IntStream.range(0, boardPage.getTotalPages())
-                    .boxed().collect(Collectors.toList());
+                    .mapToObj(i -> new PageNumber(i, i + 1))
+                    .collect(Collectors.toList());
+        }
+
+        @Data
+        public static class PageNumber {
+            private Integer index;  // 서버 전송용 (0, 1, 2...)
+            private Integer number; // 화면 표시용 (1, 2, 3...)
+
+            public PageNumber(Integer index, Integer number) {
+                this.index = index;
+                this.number = number;
+            }
+        }
+    }
+
+    @Data
+    public static class PageListDTO {
+        private Integer id;
+        private String title;
+        private String nickname;
+
+        public PageListDTO(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.nickname = board.getUser().getNickname();
         }
     }
 

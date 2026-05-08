@@ -20,10 +20,8 @@ public class BoardController {
     // 메인화면
     @GetMapping("/")
     public String list(@RequestParam(value = "page", defaultValue = "0") Integer page, Model model) {
-        // 서비스에서 페이징 처리된 정보를 DTO로 받아옵니다.
-        // 보통 PageResponse 같은 객체에 content, prevPage, nextPage, first, last 정보를 담습니다.
+        // 사용자가 ?page=1을 쿼리스트링으로 보내면, 서버 인덱스 처리에 따라 데이터 조회
         BoardResponse.PageDTO pageDTO = bs.showBoard(page);
-
         model.addAttribute("pageDTO", pageDTO);
         return "board/list";
     }

@@ -24,6 +24,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <!-- 게시글 루프 -->
                     {{#pageDTO.boards}}
                         <tr>
                             <td class="text-center text-muted small">{{id}}</td>
@@ -37,6 +38,7 @@
                         </tr>
                     {{/pageDTO.boards}}
 
+                    <!-- 게시글이 없을 경우 -->
                     {{^pageDTO.boards}}
                         <tr>
                             <td colspan="4" class="text-center py-5 text-muted">
@@ -52,19 +54,24 @@
             <div class="d-flex justify-content-center mt-5">
                 <nav aria-label="Page navigation">
                     <ul class="pagination pagination-natural">
-                        <!-- 이전 버튼 -->
+
+                        <!-- [이전] 버튼 -->
                         <li class="page-item {{#pageDTO.first}}disabled{{/pageDTO.first}}">
                             <a class="page-link" href="?page={{pageDTO.prevPage}}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
 
-                        <!-- 페이지 번호 루프 -->
+                        <!-- [페이지 번호] 루프 -->
                         {{#pageDTO.pageNumbers}}
-                            <li class="page-item"><a class="page-link" href="?page={{.}}">{{.}}</a></li>
+                            <!-- active가 true면 클래스 추가 -->
+                            <li class="page-item {{#active}}active{{/active}}">
+                                <!-- 서버로는 index(0, 1, 2)를 보내고, 화면엔 number(1, 2, 3)를 출력 -->
+                                <a class="page-link" href="?page={{index}}">{{number}}</a>
+                            </li>
                         {{/pageDTO.pageNumbers}}
 
-                        <!-- 다음 버튼 -->
+                        <!-- [다음] 버튼 -->
                         <li class="page-item {{#pageDTO.last}}disabled{{/pageDTO.last}}">
                             <a class="page-link" href="?page={{pageDTO.nextPage}}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -84,8 +91,9 @@
     </div>
 </main>
 
-<!-- 페이지네이션 커스텀 CSS (Header에 이미 넣었다면 생략 가능) -->
+<!-- 전용 스타일 (The Archive 디자인 테마) -->
 <style>
+    /* 페이지네이션 기본 스타일 */
     .pagination-natural .page-link {
         background-color: transparent;
         border: 1px solid var(--border-color);
@@ -93,22 +101,32 @@
         font-size: 0.9rem;
         padding: 0.6rem 1rem;
         margin: 0 2px;
-        transition: 0.3s;
+        transition: all 0.3s ease;
+        border-radius: 0; /* 각진 디자인 */
     }
+
+    /* 호버 효과 */
     .pagination-natural .page-link:hover {
         background-color: #f1f0eb;
         color: var(--text-black);
         border-color: var(--text-black);
     }
+
+    /* 활성화된 페이지 (Active) */
     .pagination-natural .page-item.active .page-link {
-        background-color: var(--point-green);
+        background-color: var(--point-green); /* 올리브 그린 포인트 */
         border-color: var(--point-green);
         color: white !important;
     }
+
+    /* 비활성화 상태 */
     .pagination-natural .page-item.disabled .page-link {
         color: #d1cfc9;
+        pointer-events: none; /* 클릭 방지 */
+        border-color: var(--border-color);
     }
-    /* 테이블 링크 효과 */
+
+    /* 테이블 행 호버 */
     table tbody tr:hover {
         background-color: #fdfdfd;
     }
