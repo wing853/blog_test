@@ -1,0 +1,145 @@
+{{> layout/header}}
+
+<style>
+    /* 전체 배경: 내추럴 아이보리 */
+    body { background-color: #fdfcf8; color: #2c2c2c; }
+
+    .login-container {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 0;
+    }
+
+    /* 로그인 카드: 직각 디자인과 얇은 경계선 */
+    .login-card {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        background: #ffffff;
+        width: 100%;
+        max-width: 420px;
+        overflow: hidden;
+        box-shadow: none;
+    }
+
+    .login-header {
+        padding: 50px 40px 30px;
+        text-align: center;
+    }
+
+    .login-title {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-weight: 700;
+        color: #2c2c2c;
+        letter-spacing: -1px;
+    }
+
+    /* 상단 뱃지: 한국어로 변경 */
+    .login-badge {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        font-size: 0.8rem;
+        color: #556b2f;
+        border: 1px solid #556b2f;
+        padding: 2px 12px;
+        margin-bottom: 15px;
+        display: inline-block;
+        letter-spacing: 1px;
+    }
+
+    /* 입력 필드 커스텀 */
+    .form-floating > .form-control {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        background-color: #fcfdfe;
+    }
+
+    .form-floating > .form-control:focus {
+        border-color: #556b2f;
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    .form-floating > label {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        color: #767676;
+    }
+
+    /* 로그인 버튼 */
+    .btn-login {
+        background: #2c2c2c;
+        color: #fdfcf8;
+        border: 1px solid #2c2c2c;
+        border-radius: 0;
+        font-weight: 500;
+        padding: 14px;
+        transition: all 0.3s;
+        width: 100%;
+        margin-top: 10px;
+        letter-spacing: 1px;
+        font-size: 0.95rem;
+    }
+
+    .btn-login:hover {
+        background: #556b2f;
+        border-color: #556b2f;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* 하단 링크 */
+    .login-footer {
+        padding: 30px 40px 40px;
+        text-align: center;
+        font-size: 0.85rem;
+    }
+
+    .login-footer a {
+        color: #556b2f;
+        text-decoration: none;
+        font-weight: 600;
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<main class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <span class="login-badge">개인 보관소 접속</span>
+            <h2 class="login-title mb-2">다시 만나 반가워요</h2>
+            <p class="text-muted small">기록을 이어가기 위해 로그인해 주세요.</p>
+        </div>
+
+        <div class="card-body px-5">
+            <form action="/login" method="post">
+                <!-- 아이디 입력 -->
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <label for="email">이메일 주소</label>
+                </div>
+
+                <!-- 비밀번호 입력 -->
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="password">비밀번호</label>
+                </div>
+
+                <!-- 로그인 버튼 -->
+                <button type="submit" class="btn btn-login shadow-none">아카이브 열기</button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <p class="text-muted mb-0">계정이 없으신가요? <a href="/join-form">새로운 기록자 등록하기</a></p>
+        </div>
+    </div>
+</main>
+
+{{> layout/footer}}

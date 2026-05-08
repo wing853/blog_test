@@ -1,0 +1,143 @@
+{{> layout/header}}
+
+<style>
+    /* 전체 배경: 내추럴 아이보리 */
+    body { background-color: #fdfcf8; color: #2c2c2c; }
+
+    /* 메인 카드: 그림자 제거, 얇은 선으로 클래식함 강조 */
+    .detail-card {
+        border-radius: 0;
+        background: #ffffff;
+        border: 1px solid #e8e6e1;
+        overflow: hidden;
+    }
+
+    /* 제목 영역: 세리프체와 한글의 조화 */
+    .detail-title {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-weight: 700;
+        color: #2c2c2c;
+        line-height: 1.4;
+        letter-spacing: -1px;
+    }
+
+    /* 메타 정보: 이탤릭체와 세이지 그린 포인트 */
+    .detail-meta {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-size: 1rem;
+        color: #767676;
+        border-bottom: 1px solid #e8e6e1;
+        padding-bottom: 30px;
+    }
+
+    .meta-label {
+        font-style: italic;
+        color: #556b2f;
+        margin-right: 8px;
+    }
+
+    /* 본문 영역: 가독성 높은 여백과 폰트 설정 */
+    .detail-content {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 1.15rem;
+        line-height: 2;
+        color: #333;
+        min-height: 400px;
+        white-space: pre-wrap; /* 줄바꿈 유지 */
+        padding: 40px 0;
+    }
+
+    /* 버튼 스타일 */
+    .btn-action {
+        border-radius: 0;
+        font-weight: 500;
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+    }
+
+    .btn-edit {
+        background: #2c2c2c;
+        color: #fdfcf8;
+        border: 1px solid #2c2c2c;
+    }
+
+    .btn-edit:hover {
+        background: #556b2f;
+        border-color: #556b2f;
+        color: white;
+    }
+
+    .btn-delete {
+        background: transparent;
+        color: #767676;
+        border: 1px solid #e8e6e1;
+    }
+
+    .btn-delete:hover {
+        background: #fff0f0;
+        color: #d9534f;
+        border-color: #d9534f;
+    }
+
+    .back-link {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        color: #767676;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        color: #556b2f;
+    }
+</style>
+
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+            <!-- 게시글 상세 카드 -->
+            <article class="card detail-card border-0 shadow-none">
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- 제목 -->
+                    <header class="mb-4">
+                        <span class="text-muted small mb-2 d-block" style="letter-spacing: 2px; font-family: 'Lora', serif;">ARCHIVE #{{board.id}}</span>
+                        <h1 class="detail-title display-5">{{board.title}}</h1>
+                    </header>
+
+                    <!-- 메타 정보 -->
+                    <div class="detail-meta d-flex">
+                        <div class="meta-item me-4">
+                            <span class="meta-label">기록자</span>
+                            <strong>{{board.nickname}}</strong>
+                        </div>
+                    </div>
+
+                    <!-- 본문 내용 -->
+                    <div class="detail-content">{{board.content}}</div>
+
+                    <!-- 하단 버튼 영역 -->
+                    <footer class="d-flex justify-content-between align-items-center pt-5 border-top" style="border-color: #e8e6e1 !important;">
+                        <a href="/" class="back-link">
+                            ← 목록으로 돌아가기
+                        </a>
+
+                        <div class="d-flex gap-2">
+                            <a href="/board/{{board.id}}/update-form" class="btn btn-action btn-edit">수정</a>
+
+                            <form action="/board/{{board.id}}/delete" method="post" onsubmit="return confirm('이 기록을 영구적으로 삭제하시겠습니까?');">
+                                <button type="submit" class="btn btn-action btn-delete">삭제</button>
+                            </form>
+                        </div>
+                    </footer>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</main>
+
+{{> layout/footer}}

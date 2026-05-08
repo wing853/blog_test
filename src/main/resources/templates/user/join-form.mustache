@@ -1,0 +1,192 @@
+{{> layout/header}}
+
+<style>
+    /* 전체 배경: 내추럴 아이보리 */
+    body { background-color: #fdfcf8; color: #2c2c2c; }
+
+    .join-container {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0;
+    }
+
+    /* 회원가입 카드: 직각 디자인과 미니멀한 선 */
+    .join-card {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        background: #ffffff;
+        width: 100%;
+        max-width: 480px;
+        overflow: hidden;
+        box-shadow: none;
+    }
+
+    .join-header {
+        padding: 50px 40px 30px;
+        text-align: center;
+    }
+
+    .join-title {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-weight: 700;
+        color: #2c2c2c;
+        letter-spacing: -1px;
+    }
+
+    /* 상단 뱃지: 새로운 기록자 환영 */
+    .join-badge {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        font-size: 0.8rem;
+        color: #556b2f;
+        border: 1px solid #556b2f;
+        padding: 2px 12px;
+        margin-bottom: 15px;
+        display: inline-block;
+        letter-spacing: 1px;
+    }
+
+    /* 입력 필드 커스텀 */
+    .form-floating > .form-control {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        background-color: #fcfdfe;
+        font-size: 0.95rem;
+    }
+
+    .form-floating > .form-control:focus {
+        border-color: #556b2f;
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    .form-floating > label {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        color: #767676;
+    }
+
+    /* 가입 버튼 */
+    .btn-join {
+        background: #2c2c2c;
+        color: #fdfcf8;
+        border: 1px solid #2c2c2c;
+        border-radius: 0;
+        font-weight: 500;
+        padding: 14px;
+        transition: all 0.3s;
+        width: 100%;
+        margin-top: 10px;
+        letter-spacing: 1px;
+        font-size: 0.95rem;
+    }
+
+    .btn-join:hover {
+        background: #556b2f;
+        border-color: #556b2f;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* 하단 푸터 영역: 영역 구분감 강화 */
+    .join-footer {
+        padding: 35px 40px;
+        text-align: center;
+        background-color: #fafaf8; /* 연한 톤으로 하단 분리 */
+        border-top: 1px solid #e8e6e1;
+    }
+
+    .join-footer p {
+        margin-bottom: 0;
+        font-size: 0.85rem;
+        color: #767676;
+    }
+
+    .join-footer a {
+        color: #2c2c2c;
+        text-decoration: none;
+        font-weight: 700;
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        margin-left: 8px;
+        position: relative;
+        transition: 0.3s;
+    }
+
+    /* 링크 아래 언더라인 애니메이션 */
+    .join-footer a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: #556b2f;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .join-footer a:hover {
+        color: #556b2f;
+    }
+
+    .join-footer a:hover::after {
+        transform: scaleX(1);
+    }
+
+    /* 입력 안내 텍스트 */
+    .input-hint {
+        font-size: 0.75rem;
+        color: #999;
+        margin-top: 4px;
+        margin-left: 2px;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+</style>
+
+<main class="join-container">
+    <div class="join-card">
+        <div class="join-header">
+            <span class="join-badge">새로운 기록자 등록</span>
+            <h2 class="join-title mb-2">아카이브 시작하기</h2>
+            <p class="text-muted small">당신만의 생각의 지도를 그려나갈 공간을 만드세요.</p>
+        </div>
+
+        <div class="card-body px-5 pb-5">
+            <form action="/join" method="post">
+                <!-- 이메일 입력 -->
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <label for="email">이메일 주소</label>
+                    <div class="input-hint">로그인에 사용할 이메일을 입력해 주세요.</div>
+                </div>
+
+                <!-- 닉네임 입력 -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Nickname" required maxlength="20">
+                    <label for="nickname">필명 (닉네임)</label>
+                    <div class="input-hint">기록자로 표시될 이름을 정해 주세요.</div>
+                </div>
+
+                <!-- 비밀번호 입력 -->
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="password">비밀번호</label>
+                    <div class="input-hint">안전한 비밀번호를 설정해 주세요.</div>
+                </div>
+
+                <!-- 가입 버튼 -->
+                <button type="submit" class="btn btn-join shadow-none">기록자 등록 완료</button>
+            </form>
+        </div>
+
+        <!-- 하단 로그인 유도 영역 -->
+        <div class="join-footer">
+            <p>이미 계정이 있으신가요? <a href="/login-form">로그인 하러 가기</a></p>
+        </div>
+    </div>
+</main>
+
+{{> layout/footer}}

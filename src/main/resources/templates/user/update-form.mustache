@@ -1,0 +1,115 @@
+{{> layout/header}}
+
+<style>
+    body { background-color: #fdfcf8; color: #2c2c2c; }
+
+    .update-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0;
+    }
+
+    .update-card {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        background: #ffffff;
+        width: 100%;
+        max-width: 450px;
+        overflow: hidden;
+    }
+
+    .update-header {
+        padding: 50px 40px 30px;
+        text-align: center;
+    }
+
+    .update-title {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .update-badge {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        font-size: 0.8rem;
+        color: #556b2f;
+        border: 1px solid #556b2f;
+        padding: 2px 12px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    /* 읽기 전용 이메일 필드 */
+    .form-control-plaintext {
+        border-bottom: 1px solid #e8e6e1;
+        padding-left: 10px;
+        font-family: 'Lora', serif;
+        color: #999;
+    }
+
+    .form-floating > .form-control {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+    }
+
+    .form-floating > .form-control:focus {
+        border-color: #556b2f;
+        box-shadow: none;
+    }
+
+    .btn-update {
+        background: #2c2c2c;
+        color: #fdfcf8;
+        border-radius: 0;
+        padding: 14px;
+        width: 100%;
+        margin-top: 20px;
+        transition: 0.3s;
+    }
+
+    .btn-update:hover {
+        background: #556b2f;
+        color: white;
+    }
+</style>
+
+<main class="update-container">
+    <div class="update-card">
+        <div class="update-header">
+            <span class="update-badge">Profile Archive</span>
+            <h2 class="update-title">프로필 수정</h2>
+            <p class="text-muted small">기록자의 정보를 업데이트합니다.</p>
+        </div>
+
+        <div class="card-body px-5 pb-5">
+            <form action="/user/update" method="post">
+                <!-- 이메일 (수정 불가) -->
+                <div class="mb-4">
+                    <label class="small text-muted mb-1">계정 이메일</label>
+                    <input type="text" class="form-control-plaintext" value="{{user.email}}" readonly>
+                </div>
+
+                <!-- 닉네임 수정 -->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="nickname" name="nickname"
+                           value="{{user.nickname}}" placeholder="Nickname" required>
+                    <label for="nickname">새 필명 (닉네임)</label>
+                </div>
+
+                <!-- 패스워드 수정 -->
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Password" required>
+                    <label for="password">새 비밀번호</label>
+                </div>
+
+                <button type="submit" class="btn btn-update">정보 수정 완료</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{{> layout/footer}}

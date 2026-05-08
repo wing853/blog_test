@@ -1,0 +1,98 @@
+{{> layout/header}}
+
+<style>
+    .error-container {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .error-card {
+        background-color: #ffffff;
+        border: 1px solid #e0dcd0;
+        border-radius: 8px;
+        padding: 3rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+    }
+    .error-code {
+        font-family: 'Georgia', serif;
+        font-size: 5rem;
+        font-weight: bold;
+        color: #f1f3f5; /* 가장 흐릿한 회색 - 서버의 일시적 부재를 의미 */
+        margin-bottom: 0;
+        line-height: 1;
+    }
+    .error-title {
+        font-family: 'Nanum Myeongjo', serif;
+        font-size: 1.5rem;
+        color: #333;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    .error-msg {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+        word-break: keep-all;
+    }
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+    .btn-archive {
+        flex: 1;
+        padding: 0.8rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    /* 새로고침 (문제 해결 시도) */
+    .btn-archive-dark {
+        background-color: #333;
+        color: #fff;
+        border: 1px solid #333;
+    }
+    .btn-archive-dark:hover {
+        background-color: #555;
+        color: #fff;
+    }
+    /* 메인으로 (안전한 곳으로 이동) */
+    .btn-archive-outline {
+        background-color: transparent;
+        color: #666;
+        border: 1px solid #e0dcd0;
+    }
+    .btn-archive-outline:hover {
+        background-color: #f9f9f9;
+        color: #333;
+    }
+</style>
+
+<div class="container error-container">
+    <div class="error-card">
+        <div class="error-code">500</div>
+        <h1 class="error-title">서버 오류가 발생했습니다</h1>
+        <hr style="border-top: 1px solid #e0dcd0; margin: 2rem 0;">
+
+        <p class="error-msg">
+            {{#msg}}{{msg}}{{/msg}}
+            {{^msg}}잠시 후 다시 시도해 주세요.<br>문제가 지속되면 관리자에게 문의 바랍니다.{{/msg}}
+        </p>
+
+        <div class="button-group">
+            <a onclick="location.reload()" class="btn-archive btn-archive-dark">페이지 새로고침</a>
+            <a href="/" class="btn-archive btn-archive-outline">메인 화면</a>
+        </div>
+    </div>
+</div>
+
+{{> layout/footer}}

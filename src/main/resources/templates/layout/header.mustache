@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive.</title>
+
+    <!-- 파비콘 설정: 아카이브 로고와 톤을 맞춘 올리브 그린 'A' 아이콘 -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/556B2F/a.png">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts (Lora for Serif, Noto Sans KR for Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-soft: #fdfcf8;      /* 아주 연한 아이보리 */
+            --point-green: #556b2f;  /* 차분한 올리브 그린 */
+            --text-black: #2c2c2c;
+            --text-light: #767676;
+            --border-color: #e8e6e1;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            color: var(--text-black);
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main { flex: 1; }
+
+        /* [Header] 클래식하고 정적인 디자인 */
+        .navbar-natural {
+            background-color: var(--bg-soft);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--text-black) !important;
+            letter-spacing: -1px;
+        }
+
+        .nav-link {
+            color: var(--text-black) !important;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin: 0 12px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--point-green);
+            transition: 0.3s;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after { width: 15px; }
+
+        /* [Buttons] 선 중심의 깔끔한 디자인 */
+        .btn-natural {
+            border-radius: 0;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            border: 1px solid var(--text-black);
+            background: transparent;
+            color: var(--text-black);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-natural:hover {
+            background-color: var(--text-black);
+            color: white !important;
+        }
+
+        .btn-fill {
+            background-color: var(--point-green);
+            border-color: var(--point-green);
+            color: white !important;
+        }
+
+        .btn-fill:hover {
+            background-color: #3e4e22;
+            border-color: #3e4e22;
+        }
+
+        .user-info {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            border-right: 1px solid var(--border-color);
+            padding-right: 20px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 991px) {
+            .user-info { border-right: none; margin-bottom: 1rem; }
+            .navbar-nav { text-align: center; padding-top: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-natural">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">The Archive.</a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon" style="filter: grayscale(1);"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                {{#sessionUser}}
+                    <li class="nav-item">
+                        <span class="user-info">Logged in as <strong>{{sessionUser.nickname}}</strong></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/board/save-form">글쓰기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/update-form">회원정보수정</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-natural" href="/logout">로그아웃</a>
+                    </li>
+                {{/sessionUser}}
+
+                {{^sessionUser}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login-form">로그인</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-natural btn-fill" href="/join-form">회원가입</a>
+                    </li>
+                {{/sessionUser}}
+            </ul>
+        </div>
+    </div>
+</nav>

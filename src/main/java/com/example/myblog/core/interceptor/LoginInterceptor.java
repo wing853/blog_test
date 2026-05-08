@@ -1,0 +1,27 @@
+package com.example.myblog.core.interceptor;
+
+
+import com.example.myblog.core.errors.Exception401;
+import com.example.myblog.user.UserResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+@Component // IoC 대상 - 싱글톤 패턴
+public  class LoginInterceptor implements HandlerInterceptor {
+
+    // 컨트롤러에 들어오기 전에 먼저 동작
+    // 리턴에 true 있으면 ---> Controller 로 진행 됨.
+    // 리턴에 false 있으면 --> 안 드려 보냄 (Controller 진입 불가)
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        HttpSession session = request.getSession();
+        UserResponse.SessionDTO sessionUser = (UserResponse.SessionDTO) session.getAttribute("sessionUser");
+        if(sessionUser == null) {
+            throw new Exception401("로그인 먼저 해주세요");
+        }
+        return true;
+    }
+}

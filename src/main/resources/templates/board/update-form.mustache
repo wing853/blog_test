@@ -1,0 +1,159 @@
+{{> layout/header}}
+
+<style>
+    /* 전체 배경: 일관된 내추럴 아이보리 */
+    body { background-color: #fdfcf8; color: #2c2c2c; }
+
+    .update-container {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        padding: 60px 0;
+    }
+
+    /* 수정 카드: 직각 디자인과 얇은 경계선 */
+    .update-card {
+        border-radius: 0;
+        background: #ffffff;
+        border: 1px solid #e8e6e1 !important;
+        width: 100%;
+    }
+
+    .update-header {
+        padding: 50px 50px 20px;
+        border-bottom: 1px solid #f7f5f0;
+    }
+
+    .update-title {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-weight: 700;
+        color: #2c2c2c;
+        letter-spacing: -1px;
+    }
+
+    /* 에디트 모드 뱃지: 한국어로 변경 */
+    .edit-badge {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        font-size: 0.8rem;
+        color: #556b2f;
+        border: 1px solid #556b2f;
+        padding: 2px 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    /* 입력 필드 스타일 */
+    .form-label {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #556b2f;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .form-control {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        padding: 15px;
+        transition: all 0.3s;
+        background-color: #fcfdfe;
+        font-size: 1rem;
+    }
+
+    .form-control:focus {
+        border-color: #556b2f;
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    /* 텍스트 영역 */
+    textarea.form-control {
+        min-height: 350px;
+        resize: none;
+        line-height: 1.8;
+    }
+
+    /* 버튼 스타일 */
+    .btn-update {
+        background: #2c2c2c;
+        color: #fdfcf8;
+        border: 1px solid #2c2c2c;
+        border-radius: 0;
+        font-weight: 500;
+        padding: 12px 35px;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+    }
+
+    .btn-update:hover {
+        background: #556b2f;
+        border-color: #556b2f;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        color: #767676;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 0.95rem;
+    }
+
+    .btn-cancel:hover {
+        color: #2c2c2c;
+    }
+</style>
+
+<main class="update-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="card update-card shadow-none">
+                    <div class="update-header">
+                        <span class="edit-badge">기록 수정 모드</span>
+                        <h2 class="update-title mb-0">기록 다듬기</h2>
+                        <p class="text-muted small mt-2">지나간 생각을 다시 읽고, 더 정교한 문장으로 정리해 보세요.</p>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <form action="/board/{{board.id}}/update" method="post">
+                            <!-- 제목 수정 -->
+                            <div class="mb-5">
+                                <label for="title" class="form-label">제목</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                       value="{{board.title}}" placeholder="제목을 입력하세요" required maxlength="100">
+                            </div>
+
+                            <!-- 내용 수정 -->
+                            <div class="mb-4">
+                                <label for="content" class="form-label">다듬어진 생각</label>
+                                <textarea class="form-control" id="content" name="content"
+                                          placeholder="기록의 내용을 수정해 보세요" required>{{board.content}}</textarea>
+                            </div>
+
+                            <!-- 버튼 영역 -->
+                            <div class="d-flex justify-content-end align-items-center mt-5 gap-4">
+                                <a href="/board/{{board.id}}" class="btn-cancel">수정 취소</a>
+                                <button type="submit" class="btn btn-update">수정 완료</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="text-muted small" style="font-family: 'Lora', 'Noto Sans KR', serif; font-style: italic;">
+                        "글을 쓰는 것은 인간의 일이고, 글을 고치는 것은 신의 일이다."
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> layout/footer}}

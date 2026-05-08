@@ -1,0 +1,148 @@
+{{> layout/header}}
+
+<style>
+    /* 전체 배경: 내추럴 아이보리 */
+    body { background-color: #fdfcf8; color: #2c2c2c; }
+
+    .save-container {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        padding: 60px 0;
+    }
+
+    /* 글쓰기 카드: 직선 위주의 깔끔한 디자인 */
+    .save-card {
+        border-radius: 0;
+        background: #ffffff;
+        border: 1px solid #e8e6e1 !important;
+        width: 100%;
+    }
+
+    .save-header {
+        padding: 50px 50px 20px;
+        border-bottom: 1px solid #f7f5f0;
+    }
+
+    .save-title {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-weight: 700;
+        color: #2c2c2c;
+        letter-spacing: -1px;
+    }
+
+    /* 레이블 스타일: 세이지 그린 포인트 */
+    .form-label {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #556b2f;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .form-control {
+        border-radius: 0;
+        border: 1px solid #e8e6e1;
+        padding: 15px;
+        transition: all 0.3s;
+        background-color: #fcfdfe;
+        font-size: 1rem;
+    }
+
+    .form-control:focus {
+        border-color: #556b2f;
+        box-shadow: none;
+        background-color: #fff;
+    }
+
+    /* 텍스트 영역 */
+    textarea.form-control {
+        min-height: 350px;
+        resize: none;
+        line-height: 1.8;
+    }
+
+    /* 버튼 스타일 */
+    .btn-save {
+        background: #2c2c2c;
+        color: #fdfcf8;
+        border: 1px solid #2c2c2c;
+        border-radius: 0;
+        font-weight: 500;
+        padding: 12px 35px;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+    }
+
+    .btn-save:hover {
+        background: #556b2f;
+        border-color: #556b2f;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-cancel {
+        font-family: 'Lora', 'Noto Sans KR', serif;
+        font-style: italic;
+        color: #767676;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 0.95rem;
+    }
+
+    .btn-cancel:hover {
+        color: #2c2c2c;
+    }
+</style>
+
+<main class="save-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="card save-card shadow-none">
+                    <div class="save-header">
+                        <span class="text-muted small mb-2 d-block" style="letter-spacing: 2px; font-family: 'Lora', serif;">NEW ARCHIVE</span>
+                        <h2 class="save-title mb-0">새로운 기록 남기기</h2>
+                        <p class="text-muted small mt-2">당신만의 생각과 소중한 이야기들을 이곳에 자유롭게 담아보세요.</p>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <form action="/board/save" method="post">
+                            <!-- 제목 입력 -->
+                            <div class="mb-5">
+                                <label for="title" class="form-label">제목</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                       placeholder="이야기의 제목을 적어주세요" required maxlength="100">
+                            </div>
+
+                            <!-- 내용 입력 -->
+                            <div class="mb-4">
+                                <label for="content" class="form-label">생각의 조각들</label>
+                                <textarea class="form-control" id="content" name="content"
+                                          placeholder="기록하고 싶은 내용을 편안하게 작성해 주세요..." required></textarea>
+                            </div>
+
+                            <!-- 버튼 영역 -->
+                            <div class="d-flex justify-content-end align-items-center mt-5 gap-4">
+                                <a href="/" class="btn-cancel">작성 취소</a>
+                                <button type="submit" class="btn btn-save">기록 완료</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 하단 감성 문구 -->
+                <div class="text-center mt-4">
+                    <p class="text-muted small" style="font-family: 'Lora', 'Noto Sans KR', serif; font-style: italic;">
+                        "글은 마음의 지도를 그려가는 과정입니다."
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> layout/footer}}

@@ -1,0 +1,94 @@
+{{> layout/header}}
+
+<style>
+    .error-container {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .error-card {
+        background-color: #ffffff;
+        border: 1px solid #e0dcd0;
+        border-radius: 8px;
+        padding: 3rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+    }
+    .error-code {
+        font-family: 'Georgia', serif;
+        font-size: 5rem;
+        font-weight: bold;
+        color: #f2e8cf; /* 404보다는 조금 더 경고의 느낌이 있는 따뜻한 톤 */
+        margin-bottom: 0;
+        line-height: 1;
+    }
+    .error-title {
+        font-family: 'Nanum Myeongjo', serif;
+        font-size: 1.5rem;
+        color: #333;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    .error-msg {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+        word-break: keep-all; /* 한글 단어 끊김 방지 */
+    }
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+    .btn-archive {
+        flex: 1;
+        padding: 0.8rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 0.95rem;
+    }
+    /* 이전으로 돌아가기 (강조) */
+    .btn-archive-dark {
+        background-color: #333;
+        color: #fff;
+        border: 1px solid #333;
+    }
+    .btn-archive-dark:hover {
+        background-color: #555;
+        color: #fff;
+    }
+    /* 메인으로 (보조) */
+    .btn-archive-outline {
+        background-color: transparent;
+        color: #666;
+        border: 1px solid #e0dcd0;
+    }
+    .btn-archive-outline:hover {
+        background-color: #f9f9f9;
+        color: #333;
+    }
+</style>
+
+<div class="container error-container">
+    <div class="error-card">
+        <div class="error-code">400</div>
+        <h1 class="error-title">잘못된 요청입니다</h1>
+        <hr style="border-top: 1px solid #e0dcd0; margin: 2rem 0;">
+
+        <p class="error-msg">
+            {{#msg}}{{msg}}{{/msg}}
+            {{^msg}}입력하신 정보를 다시 한번 확인해 주세요.{{/msg}}
+        </p>
+
+        <div class="button-group">
+            <a href="javascript:history.back()" class="btn-archive btn-archive-dark">이전으로 돌아가기</a>
+            <a href="/" class="btn-archive btn-archive-outline">메인 화면</a>
+        </div>
+    </div>
+</div>
+
+{{> layout/footer}}
