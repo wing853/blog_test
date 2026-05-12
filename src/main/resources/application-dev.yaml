@@ -21,7 +21,7 @@ spring:
   #데이터베이스 연결 설정 (MySQL)
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/myblog?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: root
     password: root
   #    driver-class-name: org.h2.Driver
